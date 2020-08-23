@@ -7,13 +7,13 @@ import numpy as np
 import pandas as pd
 import SimpleITK as sitk
 
-from src.resampling.utils import (get_np_volume_from_sitk,
+from resampling.utils import (get_np_volume_from_sitk,
                                   get_sitk_volume_from_np)
 
 # Default paths
-path_in = 'data/hecktor_nii/'
-path_out = 'data/bbox_nii/'
-path_bb = 'data/bbox.csv'
+path_in = '../../../data/hecktor_train/hecktor_nii/'
+path_out = '../../../data/hecktor_train/bbox_nii/'
+path_bb = '../../../data/hecktor_train/bbox.csv'
 
 
 @click.command()

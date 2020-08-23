@@ -6,7 +6,7 @@ import click
 import logging
 import pandas as pd
 
-from src.resampling.resampling import Resampler
+from resampling import Resampler
 
 # Default paths
 path_in = 'data/hecktor_nii/'
@@ -20,7 +20,7 @@ path_bb = 'data/bbox.csv'
 @click.argument('bounding_boxes_file', type=click.Path(), default=path_bb)
 @click.option('--cores',
               type=click.INT,
-              default=12,
+              default=4,
               help='The number of workers for parallelization.')
 @click.option('--resampling',
               type=click.FLOAT,

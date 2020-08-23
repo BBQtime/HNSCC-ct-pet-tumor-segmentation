@@ -5,7 +5,7 @@ from scipy.ndimage import affine_transform
 from scipy.interpolate import RegularGridInterpolator
 import SimpleITK as sitk
 
-from src.resampling.utils import (get_sitk_volume_from_np,
+from utils import (get_sitk_volume_from_np,
                                   get_np_volume_from_sitk)
 
 
