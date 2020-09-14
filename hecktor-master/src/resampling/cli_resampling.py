@@ -63,8 +63,12 @@ def main(input_folder, output_folder, bounding_boxes_file, cores, resampling,
         f for f in glob.glob(input_folder + '/**/*.nii.gz', recursive=True)
     ]
     resampler = Resampler(bb_df, output_folder, order, resampling=resampling)
-    with Pool(cores) as p:
-        p.map(resampler, files_list)
+
+    for files in files_list:
+        print('nvm...')
+        resampler(files)
+    #with Pool(cores) as p:
+    #    p.map(resampler, files_list)
 
 
 if __name__ == '__main__':

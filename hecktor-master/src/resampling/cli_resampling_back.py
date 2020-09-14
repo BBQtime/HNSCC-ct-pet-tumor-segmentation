@@ -8,9 +8,9 @@ import pandas as pd
 
 from src.resampling.resampling import Resampler
 
-path_input = "segmentation_output_renamed"
-path_output = "data/segmentation_output_tosubmit"
-path_bb = "data/bbox.csv"
+path_input = "data/hecktor_test/predicted"
+path_output = "data/hecktor_test/submit"
+path_bb = "data/hecktor_test/bbox_test.csv"
 path_res = "data/original_resolution_ct.csv"
 
 
