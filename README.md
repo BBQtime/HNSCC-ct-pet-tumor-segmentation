@@ -36,6 +36,11 @@ if conver both train and test set:
 python data_conversion.py --test=True
 ```
 
+## Filter PET by face mask
+PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
+```
+python pet_face_mask_filter.py
+```
 
 
 
