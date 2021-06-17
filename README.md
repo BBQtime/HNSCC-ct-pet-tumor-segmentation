@@ -42,5 +42,9 @@ PET has a poor spatial contrast, and its blurry boundery may highlight areas whe
 python pet_face_mask_filter.py
 ```
 
+Similary, to convert the filtered PET run:
+```
+python data_conversion_pet_fm.py --test=True
+```
 
 
