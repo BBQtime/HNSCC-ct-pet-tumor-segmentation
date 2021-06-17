@@ -144,9 +144,9 @@ if __name__ == "__main__":
     json_dict['training'] = [{'image': "./imagesTr/%s.nii.gz" % i, "label": "./labelsTr/%s.nii.gz" % i} for i in
                             patient_names]
 
-    if args.test == True:
 
-        json_dict['test'] =  [{'image': "./imagesTs/%s.nii.gz" % i, "label": "./labelsTs/%s.nii.gz" % i} for i in
-                            test_patient_names]
+
+    json_dict['test'] =  [{'image': "./imagesTs/%s.nii.gz" % i, "label": "./labelsTs/%s.nii.gz" % i} for i in
+                        test_patient_names]
 
     save_json(json_dict, join(target_base, "dataset.json"))
