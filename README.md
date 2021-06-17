@@ -1,6 +1,6 @@
 # PET/CT Head and Neck tumor auto-segmentation
 
-This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gross tumor segmentation(GTV).
+This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gross tumor volume(GTV) segmentation.
 
 
 
