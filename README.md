@@ -1,6 +1,6 @@
 # HNSCC-ct-pet-tumor-segmentation
 
-This is a repository for MICCAI 2021: HECKTOR  head and neck gross tumor segmentation(GTV).
+This is a repository for copetition of MICCAI 2021: HECKTOR - head and neck gross tumor segmentation(GTV).
 
 
 
