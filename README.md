@@ -7,7 +7,7 @@ This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gro
 
 ## Prerequisites:
 
-code for resample images to istropical 1mm grid:
+HECKTOR public code for resample images to istropical 1mm grid with bounding box(144x144x144):
 
 ```
 git https://github.com/voreille/hecktor
@@ -36,6 +36,15 @@ if conver both train and test set:
 python data_conversion.py --test=True
 ```
 
+## Filter PET by face mask
+PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
+```
+python pet_face_mask_filter.py
+```
 
+Similary, to convert the filtered PET run:
+```
+python data_conversion_pet_fm.py --test=True
+```
 
 
