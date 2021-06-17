@@ -46,5 +46,4 @@ Similary, to convert the filtered PET run:
 ```
 python data_conversion_pet_fm.py --test=True
 ```
-
-
+![image](petfm.png)
