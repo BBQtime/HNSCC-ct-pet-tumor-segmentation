@@ -94,11 +94,12 @@ if __name__ == "__main__":
         shutil.copy(ct, join(target_imagesTr, patient_name + "_0000.nii.gz"))
         shutil.copy(pt, join(target_imagesTr, patient_name + "_0001.nii.gz"))
         shutil.copy(gtv, join(target_labelsTr, patient_name + ".nii.gz"))
+    test_patient_names = []
 
     if args.test == True:
         downloaded_data_dir_test = "/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/" #change to your test folder
 
-        test_patient_names = []
+        
         test_file_list = glob.glob(os.path.join(downloaded_data_dir, '*'))
 
         test_patient_names = sorted( list(set(os.path.basename(pt)[:7] for pt in test_file_list)))
@@ -137,8 +138,8 @@ if __name__ == "__main__":
         "1": "GTVt"
     }
     json_dict['numTraining'] = len(patient_names)
-    if args.test == True:
-        json_dict['numTest'] = len(test_patient_names)
+
+    json_dict['numTest'] = len(test_patient_names)
 
     json_dict['training'] = [{'image': "./imagesTr/%s.nii.gz" % i, "label": "./labelsTr/%s.nii.gz" % i} for i in
                             patient_names]
