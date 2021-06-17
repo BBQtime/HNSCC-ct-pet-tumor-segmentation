@@ -46,4 +46,5 @@ Similary, to convert the filtered PET run:
 ```
 python data_conversion_pet_fm.py --test=True
 ```
+The last image shows an example of face mask filtered PET:
 ![image](petfm.png)
