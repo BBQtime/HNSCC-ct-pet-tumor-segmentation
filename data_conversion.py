@@ -53,7 +53,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     task_name = "Task222_hecktor"
-    downloaded_data_dir = "/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/"
+    downloaded_data_dir = "/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/" #change to your train folder
 
     print('working on ', downloaded_data_dir)
     target_base = join(nnUNet_raw_data, task_name)
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         shutil.copy(gtv, join(target_labelsTr, patient_name + ".nii.gz"))
 
     if args.test == True:
-        downloaded_data_dir_test = "/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/"
+        downloaded_data_dir_test = "/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/" #change to your test folder
 
         test_patient_names = []
         test_file_list = glob.glob(os.path.join(downloaded_data_dir, '*'))
