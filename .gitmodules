@@ -1,0 +1,3 @@
+[submodule "hecktor"]
+	path = hecktor
+	url = https://github.com/voreille/hecktor
