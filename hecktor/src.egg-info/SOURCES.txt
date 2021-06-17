@@ -1,0 +1,17 @@
+README.md
+setup.py
+src/__init__.py
+src.egg-info/PKG-INFO
+src.egg-info/SOURCES.txt
+src.egg-info/dependency_links.txt
+src.egg-info/top_level.txt
+src/data/__init__.py
+src/data/bounding_box.py
+src/data/cli_get_bb_as_mask.py
+src/data/make_dataset.py
+src/data/utils.py
+src/evaluation/__init__.py
+src/evaluation/cli_compute_scores.py
+src/evaluation/scores.py
+src/resampling/__init__.py
+src/resampling/resample.py
