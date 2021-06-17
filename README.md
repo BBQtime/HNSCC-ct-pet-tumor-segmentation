@@ -23,3 +23,19 @@ cd nnUNet
 pip install -e .
 ```
 
+convert data:
+We've provded a script to convert sampled image to nnUNet format. Please change the your file location for both `downloaded_data_dir` and `downloaded_data_dir_test`
+
+if convert train set only:
+```
+python data_conversion.py
+```
+
+if conver both train and test set:
+```
+python data_conversion.py --test=True
+```
+
+
+
+
