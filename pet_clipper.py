@@ -19,7 +19,7 @@ def pet_clipper(patient):
 
     if mode == 'quantile':
         ptc = np.clip(pet, pet.min(), np.quantile(pet, clip))
-    elif clip_mode == 'number':
+    elif mode == 'number':
         ptc = np.clip(pet, pet.min(), clip)
 
     out_file = path_in + patient +'_ptc.nii.gz'
