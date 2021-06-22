@@ -36,9 +36,10 @@ if conver both train and test set:
 python data_conversion.py --test=True
 ```
 ## Change resampled image folder
-In `path.py`, changed `resample_path` to your own resampled path. 'PatientID_ptc.nii.gz' PET clipped images would be saved to your resampled path. 
+In `path.py`, changed `resample_path` to your own resampled path. 
+
 ## Clip PET
-Clip PET by a value number or quantile percentage.
+Clip PET by a value number or quantile percentage.'PatientID_ptc.nii.gz' PET clipped images would be saved to your resampled path. 
 
 e.g. Clip PET by value numer 5. 
 ```
