@@ -8,7 +8,7 @@ import argparse
 import path
 
 
-def pet_cliper(patient):
+def pet_clipper(patient):
 
     print("processing patient no. ", patient)
 
@@ -57,5 +57,5 @@ if __name__ == "__main__":
 
     p = Pool(processes=8)              # start 8 worker processes
     #print(parameterlist)
-    p.map(pet_cliper, patient_names)
+    p.map(pet_clipper, patient_names)
     p.close()
