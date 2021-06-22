@@ -36,7 +36,7 @@ if conver both train and test set:
 python data_conversion.py --test=True
 ```
 ## Change resampled image folder
-In `path.py`, changed `resample_path` to your own resampled path.
+In `path.py`, changed `resample_path` to your own resampled path. 'PatientID_ptc.nii.gz' PET clipped images would be saved to your resampled path. 
 ## Clip PET
 Clip PET by a value number or quantile percentage.
 
@@ -51,6 +51,7 @@ python pet_clipper.py --mode=quantile --clip=0.98
 
 ## Filter PET by face mask
 PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
+'PatientID_ptfx.nii.gz' PET filtered images would be saved to your resampled path. 
 ```
 python pet_face_mask_filter.py
 ```
