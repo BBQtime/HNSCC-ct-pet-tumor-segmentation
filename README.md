@@ -50,6 +50,10 @@ e.g. Clip PET by value quantile 0.98.
 ```
 python pet_clipper.py --mode=quantile --clip=0.98
 ```
+Similary, to convert the clipped PET run:
+```
+python data_conversion_pet_fm.py --test=True
+```
 
 ### option 2. Filter PET by face mask
 PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
@@ -60,7 +64,7 @@ python pet_face_mask_filter.py
 
 Similary, to convert the filtered PET run:
 ```
-python data_conversion_pet_fm.py --test=True
+python data_conversion_clip.py --test=True
 ```
 The last image shows an example of face mask filtered PET:
 ![image](petfm.png)
