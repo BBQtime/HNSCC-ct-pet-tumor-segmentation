@@ -73,4 +73,5 @@ The last image shows an example of face mask filtered PET:
 ## Evaluation
 ### Evaluation on 5-folds cross validation(CV)
 Run evaluation on 5-folds CV using following command for task id XXX:
+
 `nnUNet_find_best_configuration -m 3d_fullres  -t XXX --strict`
