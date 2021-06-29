@@ -39,12 +39,6 @@ python data_conversion.py --test=True
 ### Change resampled image folder
 In `path.py`, changed `resample_path` to your own resampled path. 
 
-## Evaluation
-### Evaluation on 5-folds cross validation(CV)
-Run evaluation on 5-folds CV using following command for task id XXX:
-
-`nnUNet_find_best_configuration -m 3d_fullres  -t XXX --strict`
-
 
 ### option 1. Filter PET by face mask
 PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
@@ -80,3 +74,8 @@ python data_conversion_clip.py --test=True
 ![image](petcf.png)
 
 
+## Evaluation
+### Evaluation on 5-folds cross validation(CV)
+Run evaluation on 5-folds CV using following command for task id XXX:
+
+`nnUNet_find_best_configuration -m 3d_fullres  -t XXX --strict`
