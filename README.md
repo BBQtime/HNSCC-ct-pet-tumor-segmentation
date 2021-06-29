@@ -54,6 +54,7 @@ Similary, to convert the clipped PET run:
 ```
 python data_conversion_clip.py --test=True
 ```
+![image](petcf.png)
 
 ### option 2. Filter PET by face mask
 PET has a poor spatial contrast, and its blurry boundery may highlight areas where there is no tissue. We utilized a facial mask to filter the PET image to diminish the impact.
