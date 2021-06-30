@@ -22,7 +22,6 @@ from nnunet.training.data_augmentation.data_augmentation_moreDA import get_moreD
 from nnunet.training.loss_functions.deep_supervision import MultipleOutputLoss2
 from nnunet.utilities.to_torch import maybe_to_torch, to_cuda
 from nnunet.network_architecture.generic_UNet import Generic_UNet
-from nnunet.network_architecture.deformable_UNet import Deform_UNet
 from nnunet.network_architecture.initialization import InitWeights_He
 from nnunet.network_architecture.neural_network import SegmentationNetwork
 from nnunet.training.data_augmentation.default_data_augmentation import default_2D_augmentation_params, \
@@ -36,9 +35,6 @@ from torch.cuda.amp import autocast
 from nnunet.training.learning_rate.poly_lr import poly_lr
 from batchgenerators.utilities.file_and_folder_operations import *
 
-from nnunet.training.network_training.nnUNet_variants.optimizer_and_lr.nnUNetTrainerV2_Adam import nnUNetTrainerV2_Adam
-from nnunet.training.loss_functions.dice_loss import DC_and_topk_loss
-
 
 class nnUNetTrainerV2_1000DA(nnUNetTrainer):
     """
@@ -51,13 +47,9 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
                          deterministic, fp16)
         self.max_num_epochs = 1000
         self.initial_lr = 1e-2
-        #self.initial_lr = 3e-4
-
         self.deep_supervision_scales = None
         self.ds_loss_weights = None
 
-        self.loss = DC_and_topk_loss({'batch_dice': self.batch_dice, 'smooth': 1e-5, 'do_bg': False},
-                                     {'k': 10})
         self.pin_memory = True
 
     def initialize(self, training=True, force_load_plans=False):
@@ -156,11 +148,9 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
             norm_op = nn.InstanceNorm2d
 
         norm_op_kwargs = {'eps': 1e-5, 'affine': True}
-        dropout_op_kwargs = {'p': 0.25, 'inplace': True}
+        dropout_op_kwargs = {'p': 0, 'inplace': True}
         net_nonlin = nn.LeakyReLU
         net_nonlin_kwargs = {'negative_slope': 1e-2, 'inplace': True}
-        #self.network = Generic_UNet(self.num_input_channels, self.base_num_features, self.num_classes,
-        #self.network = Deform_UNet(self.num_input_channels, self.base_num_features, self.num_classes,
         self.network = Generic_UNet(self.num_input_channels, self.base_num_features, self.num_classes,
                                     len(self.net_num_pool_op_kernel_sizes),
                                     self.conv_per_stage, 2, conv_op, norm_op, norm_op_kwargs, dropout_op,
@@ -171,18 +161,11 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
             self.network.cuda()
         self.network.inference_apply_nonlin = softmax_helper
 
-
     def initialize_optimizer_and_scheduler(self):
         assert self.network is not None, "self.initialize_network must be called first"
         self.optimizer = torch.optim.SGD(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay,
                                          momentum=0.99, nesterov=True)
         self.lr_scheduler = None
-
-    # ! change from SGD to ADAM
-    # def initialize_optimizer_and_scheduler(self):
-    #     assert self.network is not None, "self.initialize_network must be called first"
-    #     self.optimizer = torch.optim.Adam(self.network.parameters(), self.initial_lr, weight_decay=self.weight_decay, amsgrad=True)
-    #     self.lr_scheduler = None
 
     def run_online_evaluation(self, output, target):
         """
@@ -307,7 +290,7 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
 
             # if the split file does not exist we need to create it
             if not isfile(splits_file):
-                self.print_to_log_file("Creating new split...")
+                self.print_to_log_file("Creating new 5-fold cross-validation split...")
                 splits = []
                 all_keys_sorted = np.sort(list(self.dataset.keys()))
                 kfold = KFold(n_splits=5, shuffle=True, random_state=12345)
@@ -319,14 +302,21 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
                     splits[-1]['val'] = test_keys
                 save_pickle(splits, splits_file)
 
-            splits = load_pickle(splits_file)
+            else:
+                self.print_to_log_file("Using splits from existing split file:", splits_file)
+                splits = load_pickle(splits_file)
+                self.print_to_log_file("The split file contains %d splits." % len(splits))
 
+            self.print_to_log_file("Desired fold for training: %d" % self.fold)
             if self.fold < len(splits):
                 tr_keys = splits[self.fold]['train']
                 val_keys = splits[self.fold]['val']
+                self.print_to_log_file("This split has %d training and %d validation cases."
+                                       % (len(tr_keys), len(val_keys)))
             else:
-                self.print_to_log_file("INFO: Requested fold %d but split file only has %d folds. I am now creating a "
-                                       "random 80:20 split!" % (self.fold, len(splits)))
+                self.print_to_log_file("INFO: You requested fold %d for training but splits "
+                                       "contain only %d folds. I am now creating a "
+                                       "random (but seeded) 80:20 split!" % (self.fold, len(splits)))
                 # if we request a fold that is not in the split file, create a random 80:20 split
                 rnd = np.random.RandomState(seed=12345 + self.fold)
                 keys = np.sort(list(self.dataset.keys()))
@@ -334,6 +324,8 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
                 idx_val = [i for i in range(len(keys)) if i not in idx_tr]
                 tr_keys = [keys[i] for i in idx_tr]
                 val_keys = [keys[i] for i in idx_val]
+                self.print_to_log_file("This random 80:20 split has %d training and %d validation cases."
+                                       % (len(tr_keys), len(val_keys)))
 
         tr_keys.sort()
         val_keys.sort()
@@ -383,24 +375,18 @@ class nnUNetTrainerV2_1000DA(nnUNetTrainer):
                                                              self.data_aug_params['rotation_z'],
                                                              self.data_aug_params['scale_range'])
             self.basic_generator_patch_size = np.array([self.patch_size[0]] + list(self.basic_generator_patch_size))
-            patch_size_for_spatialtransform = self.patch_size[1:]
         else:
             self.basic_generator_patch_size = get_patch_size(self.patch_size, self.data_aug_params['rotation_x'],
                                                              self.data_aug_params['rotation_y'],
                                                              self.data_aug_params['rotation_z'],
                                                              self.data_aug_params['scale_range'])
-            patch_size_for_spatialtransform = self.patch_size
 
         self.data_aug_params["scale_range"] = (0.7, 1.4)
-
         self.data_aug_params["do_elastic"] = True
         self.data_aug_params["p_eldef"] = 0.3
         self.data_aug_params["eldef_deformation_scale"] = (0, 0.25)
-
-
         self.data_aug_params['selected_seg_channels'] = [0]
-        self.data_aug_params['patch_size_for_spatialtransform'] = patch_size_for_spatialtransform
-
+        self.data_aug_params['patch_size_for_spatialtransform'] = self.patch_size
         # ! channel_translation 
         #self.data_aug_params['channel_translation'] = True
         #self.data_aug_params['const_channel'] = 0
