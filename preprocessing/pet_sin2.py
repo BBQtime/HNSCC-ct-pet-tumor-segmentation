@@ -18,9 +18,9 @@ def pet_sin_transform(patient):
     pet = sitk.GetArrayFromImage(pet_img)
 
 
-    ptsin = np.sin(pet)
+    ptsin = np.sin(1.5*pet)
 
-    out_file = path_in + patient +'_ptsin.nii.gz'
+    out_file = path_in + patient +'_ptsin2.nii.gz'
 
     img_ = sitk.GetImageFromArray(ptsin)
     img_.CopyInformation(pet_img)
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     # print(len(parameterlist))
 
 
-    p = Pool(processes=32)              # start 8 worker processes
+    p = Pool(processes=64)              # start 8 worker processes
     #print(parameterlist)
     p.map(pet_sin_transform, patient_names)
     p.close()
