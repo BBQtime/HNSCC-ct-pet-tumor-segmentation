@@ -10,7 +10,7 @@ This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gro
 HECKTOR public code for resample images to istropical 1mm grid with bounding box(144x144x144):
 
 ```
-git https://github.com/voreille/hecktor
+git clone https://github.com/voreille/hecktor
 cd hecktor/src/resampling/
 python resample.py
 ```
