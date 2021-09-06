@@ -17,7 +17,7 @@ python data_conversion_pet_fm.py --test=True
 ```
 
 The last image shows an example of face mask filtered PET:
-![image](petfm.png)
+![image](../petfm.png)
 
 ### option 2. Clip PET
 Clip PET by a value number or quantile percentage.'PatientID_ptc.nii.gz' PET clipped images would be saved to your resampled path. 
@@ -34,7 +34,7 @@ Similary, to convert the clipped PET run:
 ```
 python data_conversion_clip.py --test=True
 ```
-![image](petcf.png)
+![image](../petcf.png)
 
 
 ## Evaluation
