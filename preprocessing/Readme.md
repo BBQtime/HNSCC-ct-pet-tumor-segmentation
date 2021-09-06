@@ -37,8 +37,3 @@ python data_conversion_clip.py --test=True
 ![image](../petcf.png)
 
 
-## Evaluation
-### Evaluation on 5-folds cross validation(CV)
-Run evaluation on 5-folds CV using following command for task id XXX:
-
-`nnUNet_find_best_configuration -m 3d_fullres  -t XXX --strict`
