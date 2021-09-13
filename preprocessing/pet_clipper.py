@@ -32,13 +32,13 @@ def pet_clipper(patient):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--mode", type=str, default='quantile',
+    parser.add_argument("--mode", type=str, default='number',
                             help="clip mode choose from \'quantile\' and \'number\'")
-    parser.add_argument("--clip", type=float, default=0.98,
+    parser.add_argument("--clip", type=float, default=5,
                             help="clip value")
     args = parser.parse_args()
     # path_in = "/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/" #change to your train folder
-    path_in  = path.resampled_path
+    path_in  = path.resampled_path[1]
     clip = args.clip
     mode = args.mode
 

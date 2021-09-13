@@ -8,9 +8,9 @@ import numpy as np
 import SimpleITK as sitk
 
 # Default paths
-path_in = '/mnt/faststorage/jintao/HNSCC/hecktor2021_train/hecktor_nii/'
-path_out = '/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/'
-path_bb = '/mnt/faststorage/jintao/HNSCC/hecktor2021_train/hecktor2021_bbox_training.csv'
+path_in = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/hecktor_nii/'
+path_out = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/'
+path_bb = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/hecktor2021_bbox_testing.csv'
 
 
 @click.command()
@@ -68,21 +68,21 @@ def main(input_folder, output_folder, bounding_boxes_file, cores, resampling):
             str([f for f in input_folder.rglob(p + "_ct*")][0].resolve()))
         pt = sitk.ReadImage(
             str([f for f in input_folder.rglob(p + "_pt*")][0].resolve()))
-        gtvt = sitk.ReadImage(
-            str([f for f in input_folder.rglob(p + "_gtvt*")][0].resolve()))
+        #gtvt = sitk.ReadImage(
+        #    str([f for f in input_folder.rglob(p + "_gtvt*")][0].resolve()))
         resampler.SetOutputOrigin(bb[:3])
         resampler.SetSize([int(k) for k in size])  # sitk is so stupid
         resampler.SetInterpolator(sitk.sitkBSpline)
         ct = resampler.Execute(ct)
         pt = resampler.Execute(pt)
         resampler.SetInterpolator(sitk.sitkNearestNeighbor)
-        gtvt = resampler.Execute(gtvt)
+        #gtvt = resampler.Execute(gtvt)
         sitk.WriteImage(ct, str(
             (output_folder / (p + "_ct.nii.gz")).resolve()))
         sitk.WriteImage(pt, str(
             (output_folder / (p + "_pt.nii.gz")).resolve()))
-        sitk.WriteImage(gtvt,
-                        str((output_folder / (p + "_gtvt.nii.gz")).resolve()))
+        #sitk.WriteImage(gtvt,
+        #                str((output_folder / (p + "_gtvt.nii.gz")).resolve()))
     print(patient_list)
     for p in patient_list:
         resample_one_patient(p)

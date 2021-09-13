@@ -29,21 +29,21 @@ def pet_sin_transform(patient):
 
 if __name__ == "__main__":
     
-    path_in  = path.resampled_path
+    #path_in  = path.resampled_path
+    for path_in in path.resampled_path:
+        print('working direcotroy is: ', path_in)
+        file_list = glob.glob(os.path.join(path_in, '*'))
 
-    print('working direcotroy is: ', path_in)
-    file_list = glob.glob(os.path.join(path_in, '*'))
+        patient_names = sorted( list(set(os.path.basename(patient)[:7] for patient in file_list)))
+        print("patient names", patient_names)
 
-    patient_names = sorted( list(set(os.path.basename(patient)[:7] for patient in file_list)))
-    print("patient names", patient_names)
-
-    # parameterlist = []
-    # for index, _ in enumerate(patient_names):
-    #     parameterlist.extend([[patient_names[index]]])
-    # print(len(parameterlist))
+        # parameterlist = []
+        # for index, _ in enumerate(patient_names):
+        #     parameterlist.extend([[patient_names[index]]])
+        # print(len(parameterlist))
 
 
-    p = Pool(processes=32)              # start 8 worker processes
-    #print(parameterlist)
-    p.map(pet_sin_transform, patient_names)
-    p.close()
+        p = Pool(processes=32)              # start 8 worker processes
+        #print(parameterlist)
+        p.map(pet_sin_transform, patient_names)
+        p.close()

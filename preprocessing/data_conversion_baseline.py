@@ -47,12 +47,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     parser.add_argument("test", type=str2bool, nargs='?',
-                            const=True, default=False,
+                            const=True, default=True,
                             help="also convert test set")
 
     args = parser.parse_args()
 
-    task_name = "Task229_hecktor_base_focal"
+    task_name = "Task221_hecktor_baseline"
     downloaded_data_dir = "/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/" #change to your train folder
 
     print('working on ', downloaded_data_dir)
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     if args.test == True:
         downloaded_data_dir_test = "/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/" #change to your test folder
 
-        test_file_list = glob.glob(os.path.join(downloaded_data_dir, '*'))
+        test_file_list = glob.glob(os.path.join(downloaded_data_dir_test, '*'))
 
         test_patient_names = sorted( list(set(os.path.basename(pt)[:7] for pt in test_file_list)))
         print("patient names", patient_names)
@@ -111,22 +111,24 @@ if __name__ == "__main__":
         cur = downloaded_data_dir_test
         for p in test_patient_names:
             patient_name = p
-            ct = os.path.join(downloaded_data_dir,p+"_ct.nii.gz")
-            pt = os.path.join(downloaded_data_dir, p+"_pt.nii.gz")
-            gtv = os.path.join(downloaded_data_dir,p+"_gtvt.nii.gz")
-
+            ct = os.path.join(downloaded_data_dir_test,p+"_ct.nii.gz")
+            pt = os.path.join(downloaded_data_dir_test,p+"_pt.nii.gz")
+            #gtv = os.path.join(downloaded_data_dir_test,p+"_gtvt.nii.gz")
+            print(ct)    
+            print(pt)        
+            #print(gtv)    
             assert all([
                 isfile(ct),
-                isfile(pt),
-                isfile(gtv)
+                isfile(pt)
+                #isfile(gtv)
             ]), "%s" % patient_name
 
             shutil.copy(ct, join(target_imagesTs, patient_name + "_0000.nii.gz"))
-            shutil.copy(pt, join(target_imagesTr, patient_name + "_0001.nii.gz"))
-            shutil.copy(gtv, join(target_labelsTs, patient_name + ".nii.gz"))
+            shutil.copy(pt, join(target_imagesTs, patient_name + "_0001.nii.gz"))
+            #shutil.copy(gtv, join(target_labelsTs, patient_name + ".nii.gz"))
 
     json_dict = OrderedDict()
-    json_dict['name'] = "Task229_hecktor_base_focal"
+    json_dict['name'] = "Task221_hecktor_baseline"
     json_dict['description'] = "nothing"
     json_dict['tensorImageSize'] = "4D"
     json_dict['reference'] = "NA"
@@ -149,7 +151,7 @@ if __name__ == "__main__":
 
 
 
-    json_dict['test'] =  [{'image': "./imagesTs/%s.nii.gz" % i, "label": "./labelsTs/%s.nii.gz" % i} for i in
+    json_dict['test'] =  ["./imagesTs/%s.nii.gz" % i for i in
                         test_patient_names]
 
     save_json(json_dict, join(target_base, "dataset.json"))

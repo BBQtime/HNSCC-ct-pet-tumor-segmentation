@@ -1,0 +1,23 @@
+# paths:
+path_to_data: '/mnt/faststorage/jintao/HNSCC/hecktor2021_train/resampled/'  # directory with images
+path_to_pkl: '/home/sysgen/gitlab/HNSCC-ct-pet-tumor-segmentation/Task2_PFS/src/data/splits/train_val_split_0.pkl'  # pkl file with train / val splits
+path_to_save_dir: '/home/sysgen/gitlab/HNSCC-ct-pet-tumor-segmentation/Task2_PFS/results_CH_sine/'  # all results (weights, learning curves, etc) will be saved here
+path_to_PFS_csv: '/mnt/faststorage/jintao/HNSCC/hecktor2021_train//hecktor2021_patient_endpoint_training.csv' # Progression free survival for task2
+
+# train settings:
+train_batch_size: 20
+val_batch_size: 20
+num_workers: 16  # for example, use a number of CPU cores
+
+lr: 1e-3  # initial learning rate
+n_epochs: 30  # number of training epochs (300 was used in the paper)
+n_cls: 1  # number of classes to predict (background and tumor)
+in_channels: 2  # number of input modalities
+n_filters: 24  # number of filters after the input (24 was used in the paper)
+reduction: 2  # parameter controls the size of the bottleneck in SENorm layers
+
+T_0: 25  # parameter for 'torch.optim.lr_scheduler.CosineAnnealingWarmRestarts'
+eta_min: 1e-5  # parameter for 'torch.optim.lr_scheduler.CosineAnnealingWarmRestarts'
+
+# model:
+baseline: false  # if `true`, U-Net will be used. Otherwise, the model described in the paper will be trained.
