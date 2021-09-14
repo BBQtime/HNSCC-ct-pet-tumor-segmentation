@@ -1,4 +1,4 @@
-# PET/CT Head and Neck tumor auto-segmentation
+# PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT and Various Attempts at Patient Outcome Prediction
 
 This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gross tumor volume(GTV) segmentation.
 
