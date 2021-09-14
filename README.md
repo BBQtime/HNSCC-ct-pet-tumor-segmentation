@@ -2,7 +2,7 @@
 
 This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gross tumor volume(GTV) segmentation.
 
-![](Figure2_2.png) 
+![](Figure2.png) 
 
 
 ## Prerequisites:
