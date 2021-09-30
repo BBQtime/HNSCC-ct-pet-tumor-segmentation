@@ -2,15 +2,15 @@ from pathlib import Path
 from multiprocessing import Pool
 import logging
 
-import click
+import click 
 import pandas as pd
 import numpy as np
 import SimpleITK as sitk
 
 # Default paths
-path_in = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/hecktor_nii/'
-path_out = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/resampled/'
-path_bb = '/mnt/faststorage/jintao/HNSCC/hecktor2021_test/hecktor2021_bbox_testing.csv'
+path_in = '/home/jintao/faststorage/data/hecktor2021_train/hecktor_nii/'
+path_out = '/home/jintao/faststorage/data/hecktor2021_train/resampled/'
+path_bb = '/home/jintao/faststorage/data/hecktor2021_tr ain/hecktor2021_bbox_training.csv'
 
 
 @click.command()
