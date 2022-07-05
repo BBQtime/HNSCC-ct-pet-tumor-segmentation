@@ -1,15 +1,13 @@
 # PET/CT Head and Neck tumor auto-segmentation
 
 This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gross tumor volume(GTV) segmentation.
-Segmentation task:
-### PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT
-Treatment outcomes task:
-### Comparing deep learning and conventional machine learning for outcome prediction of head and neck cancer in PET/CT
 
-```
+Task 1: Segmentation of GTV:
+#### PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT
+Task 2: Treatment outcomes prediction:
+#### Comparing deep learning and conventional machine learning for outcome prediction of head and neck cancer in PET/CT
 
 ![](Figure2.png) 
-
 
 ## Prerequisites:
 
@@ -62,10 +60,11 @@ For more details, please reference to:
   year={2021},
   organization={Springer}
 }
-
+```
 and 
 
 ##### Huynh, B. N., Ren, J., Groendahl, A. R., Tomic, O., Korreman, S. S., & Futsaether, C. M. (2021, September). Comparing deep learning and conventional machine learning for outcome prediction of head and neck cancer in PET/CT. In 3D Head and Neck Tumor Segmentation in PET/CT Challenge (pp. 318-326). Springer, Cham.
+
 ```
 @inproceedings{huynh2021comparing,
   title={Comparing deep learning and conventional machine learning for outcome prediction of head and neck cancer in PET/CT},
