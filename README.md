@@ -5,7 +5,7 @@ This is a repository for competition of MICCAI 2021: HECKTOR - head and neck gro
 
 For more details, please reference to: 
 
-### Ren, J., Huynh, B. N., Groendahl, A. R., Tomic, O., Futsaether, C. M., & Korreman, S. S. (2021, September). PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT. In 3D Head and Neck Tumor Segmentation in PET/CT Challenge (pp. 83-91). Springer, Cham.
+##### Ren, J., Huynh, B. N., Groendahl, A. R., Tomic, O., Futsaether, C. M., & Korreman, S. S. (2021, September). PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT. In 3D Head and Neck Tumor Segmentation in PET/CT Challenge (pp. 83-91). Springer, Cham.
 ```
 @inproceedings{ren2021pet,
   title={PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT},
