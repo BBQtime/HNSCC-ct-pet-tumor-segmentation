@@ -48,7 +48,7 @@ Run evaluation on 5-folds CV using following command for task id XXX:
 
 
 
-For more details, please reference to: 
+## For more details, please reference to: 
 
 ##### Ren, J., Huynh, B. N., Groendahl, A. R., Tomic, O., Futsaether, C. M., & Korreman, S. S. (2021, September). PET Normalizations to Improve Deep Learning Auto-Segmentation of Head and Neck Tumors in 3D PET/CT. In 3D Head and Neck Tumor Segmentation in PET/CT Challenge (pp. 83-91). Springer, Cham.
 ```
